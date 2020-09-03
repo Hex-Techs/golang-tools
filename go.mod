@@ -1,4 +1,4 @@
-module michaelson-tools
+module github.com/michaelson/golang-tools
 
 go 1.15
 
