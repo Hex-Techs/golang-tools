@@ -18,7 +18,9 @@ package random
 
 import (
 	"crypto/rand"
+	"fmt"
 	"io"
+	"strconv"
 )
 
 // idLen is a length of captcha id string.
@@ -43,6 +45,28 @@ func init() {
 // solution.
 func RandomDigits(length int) []byte {
 	return randomBytesMod(length, 10)
+}
+
+func RandomDigitsToString(length int) string {
+	return randomdigitsToString(randomBytesMod(length, 10))
+}
+
+func RandomDigitsToInt(length int) int {
+	return randomdigitsToInt(randomBytesMod(length, 10))
+}
+
+func randomdigitsToString(b []byte) string {
+	var digitsString string
+	for _, tmp := range b {
+		digitsString = fmt.Sprintf("%s%d", digitsString, int(tmp))
+	}
+
+	return digitsString
+}
+
+func randomdigitsToInt(b []byte) int {
+	digitsInt, _ := strconv.Atoi(randomdigitsToString(b))
+	return digitsInt
 }
 
 // randomBytes returns a byte slice of the given length read from CSPRNG.
